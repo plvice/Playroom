@@ -1,0 +1,120 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <button class="button"><span>Button text</span></button>
+
+        <style>
+            body {
+                padding: 24%;
+                text-align: center;
+            }
+
+            .button {
+                background: blue;
+                border: 0;
+                border-radius: 4px;
+                cursor: pointer;
+                color: #fff;
+                display: inline-block;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 16px;
+                line-height: 1.4;
+                padding: 12px 16px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .button:hover {
+                background: rgb(53, 53, 255);
+            }
+
+            .button span {
+                position: relative;
+                z-index: 2;
+            }
+
+            .button:active, .button:focus {
+                outline-style: none;
+                box-shadow: none;
+            }
+
+            .button:before {
+                background: rgba(255, 255, 255, 0.4);
+                border-radius: 100%;
+                content: '';
+                display: block;
+                height: 500%;
+                left: -100%;
+                position: absolute;
+                top: -120px;
+                width: 100%;
+            }
+
+            .button.circle:before {
+                animation: 0.5s ease-in-out fly;
+            }
+
+            @keyframes fly {
+                0% {
+                    opacity: 1;
+                }
+
+                50% {
+                    opacity: 0.7;
+                }
+
+                70% {
+                    opacity: 0.3;
+                }
+
+                100% {
+                    transform: scale(3);
+                    opacity: 0.1;
+                }
+            }
+        </style>
+
+        <script>
+            (function() {
+                let body = document.querySelector('body');
+
+                let tmt = function (element) { 
+                    element.classList.remove('circle'); 
+                }
+
+                body.addEventListener('click', function(e) {
+                    let target = e.target;
+                    let parent = target.parentNode;
+
+                    let targetClick = target.classList.contains('button');
+                    let parentClick = parent.classList.contains('button');
+
+                    let cls = 'circle';
+
+                    if (targetClick) {
+                        let el = e.target;
+                        target.classList.remove(cls);
+                        target.classList.add(cls);
+
+                        setTimeout(function(el) {
+                            el.classList.remove(cls); 
+                        }, 450, target);
+                    }
+
+                    if (parentClick) {
+                        parent.classList.remove(cls);
+                        parent.classList.add(cls);
+
+                        setTimeout(function(el){
+                            el.classList.remove(cls); 
+                        }, 450, parent);
+                    }
+                    
+                }, false);
+            })();
+            
+        </script>
+    </body>
+</html>
